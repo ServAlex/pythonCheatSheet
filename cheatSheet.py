@@ -99,6 +99,8 @@ if 0==0:
 	smth
 elif 1==1:
 	smth
+elif 2==2:
+	smth
 else:
 	smth
 
@@ -113,16 +115,46 @@ list(range(5))				# [0, 1, 2, 3, 4]
 
 '----------------------------------------------------------------------------------------------------'
 
-for w in words:
+words = ['123456', '12345', '1234']
+
+for w in words:                         # enumerating by items
 	print(w, len(w))
 
-for i in range(len(squares))
-	print(i, squares[i])
+for i in range(len(words))              # enumerating by indexes
+	print(i, words[i])
+        
+for w in words[:]:                      # enumerating by items in the copy
+    if(len(w) < 4)
+        break                           # terminates loop execution
+    if(len(w) < 5)
+        continue                        # terminates current ittereation, skips to the next one
+    words.insert(0, w)
+else:                                   # executes if loop is finished and break wasn't called
+    print('all words of length greater than 5 was duplicated')
 
 '----------------------------------------------------------------------------------------------------'
 
-for …:
-else:
+pass                                    # does nothing, used for empty classes and functions
 
 '----------------------------------------------------------------------------------------------------'
 
+# functions
+
+def printingFunction(parameter):
+    """this function description, always use this"""
+    print(parameter)
+
+def add(a, b):
+    """adding function"""
+    return a + b 
+
+printingFunction('something to print')
+
+p = printingFunction                    # variable p now is equal to function printingFunction
+
+print('printing result', p('asdf'))     # function without a return statement returns None 
+                                        # return statement without parameter also returns None
+
+'----------------------------------------------------------------------------------------------------'
+'----------------------------------------------------------------------------------------------------'
+'----------------------------------------------------------------------------------------------------'
