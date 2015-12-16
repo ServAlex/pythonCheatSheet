@@ -25,6 +25,7 @@ word[:]					# the whole word
 len(word)				# built in function for string lenth
 
 str(3)					# convert to string
+str(3).zfill(2)                         # 03
 
 '----------------------------------------------------------------------------------------------------'
 
@@ -141,7 +142,7 @@ pass                                    # does nothing, used for empty classes a
 # functions
 
 def printingFunction(parameter):
-    """this function description, always use this"""
+    """this is function description, always use this"""
     print(parameter)
 
 def add(a, b):
@@ -154,6 +155,120 @@ p = printingFunction                    # variable p now is equal to function pr
 
 print('printing result', p('asdf'))     # function without a return statement returns None 
                                         # return statement without parameter also returns None
+
+# default argument values
+
+def increment(a, b = 1):
+    """increments first argument by some value, by default 1"""
+    return a+b
+
+print(increment(10))
+print(increment(10, 2))
+
+                                        # variable value may be used for default value
+                                        # value that is actual at the time of 
+                                        # function difinition will be used
+
+                                        # if def value is mutable, 
+                                        # mutations will be preserved from call to call
+def a(a, L=[]):
+    L.append(a)
+    return L
+
+a(1)                                    # [1]
+a(2)                                    # [1, 2]
+a(3,[])                                 # [3]
+a(4)                                    # [1, 2, 4]
+
+def a(a, L=None):                       # this is the trick for preventing this 
+    if L is None: 
+        L=[]
+    L.append(a)
+    return L
+
+
+# keyword arguments
+
+def addingManyValues(a, b=1, c=2):
+    return a + b + c
+
+addingManyValues(1)
+addingManyValues(1, b=3)
+addingManyValues(1, c=4)
+addingManyValues(1, c=4, b=3)
+
+					# you can't:
+addingManyValues(b=3, 1)		# pass positional argument after keyword one
+addingManyValues(1, a=7)		# pass parameter value multiple times
+addingManyValues(b=3)	                # skip argument without a default value
+addingManyValues(1, lord='marshal')	# pass anknown keyword paramenter
+
+
+# arbitrary number of positional and keyword arguments 
+
+def allTheArgs(a, *arguments, **dictionary, b=1):
+    print(a, b)
+    for arg in arguments:		# *name arg will get all the positional arguments beyond a
+	print(arg)
+    keys = sorted(dictionary.keys())	# **name arg will get dict of all the keyword args beyond b
+    for key in keys:			
+	print(key, ': ', dictionary[key])
+
+allTheArgs(a, 4, 2, 3, lord='marshal', b=2)
+
+
+# unpacking arguments, reverse situation
+
+args = [1, 2]
+add(*args)				# * in front of sequence unpacks it into positioned args
+
+args = {'a':1, 'b':2, 'c':3}
+addingManyValues(**args)		# ** unpacks dictionary into keyworded args 
+
+
+# lambda expressions
+
+addLambda = lambda a, b: a+b		# created function adding together it's two args
+addLambda(1, 2)				# 3
+
+def functionAddingNumber(a):
+    return lambda x: x + a		# generates a new function that will add a to it's argument
+
+addFortyTwo = functionAddingNumber(42)	# function adding 42 to it's argument
+
+addFortyTwo(0)				# 42
+addFortyTwo(1)				# 43
+
+					# useful for passing function as an argument
+
+pairs = [(1, b), (2, f), (3, a)]
+paris.sort(key=lambda pair: pair[1])
+pairs					# [(3, a), (1, b), (2, f)]
+
+
+# doc strings
+
+					# first line is short summary 
+					# without mentioning function name or type
+					# starts with capital, ends with period
+
+def docFunc():
+    """Does nothing, but documents it.
+
+    No more descriptions here.		
+    """
+    pass
+					# if there's more than one line, second one should be blank
+					
+
+# function annotations
+
+def increments(a: int, b:int = 1) -> int:
+    return a + b
+
+increments.__annotations__		#{'renurn': <class 'int'>, 'a': <class 'int'>, 
+					#   'b': <class 'int'>}
+					# without type annotations it would return {}
 
 '----------------------------------------------------------------------------------------------------'
 '----------------------------------------------------------------------------------------------------'
