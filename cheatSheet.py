@@ -88,7 +88,8 @@ print('asd2', end=',')			# asd1,asd2,
 '----------------------------------------------------------------------------------------------------'
 
 
-# 4 Control flow
+
+####    4   Control flow
 
 '----------------------------------------------------------------------------------------------------'
 
@@ -271,5 +272,72 @@ increments.__annotations__		#{'renurn': <class 'int'>, 'a': <class 'int'>,
 					# without type annotations it would return {}
 
 '----------------------------------------------------------------------------------------------------'
+
+
+
+####    5   data structures
+
 '----------------------------------------------------------------------------------------------------'
+
+# lists
+
+x=42
+L=[] 
+i=0
+list = []
+
+list.append(x)                          # appends item to the end
+list.extend(L)                          # appends L list items to the end
+list.insert(i, x)                       # inserts x item at position i
+list.remove(x)                          # removes first occurance of x
+list.pop([i])                           # removes and returns item at position i, () removes last one
+list.clear()                            # remove all items. Equiv. to del a[:]
+list.index(x)                           # returns index of first x in the list, error if not found
+list.count(x)                           # returns number of items
+list.sort(key=None, reverse=False)      # sorts the list
+list.reverse()                          # reverses the items order
+list.copy()                             # return a shallow copy. Equiv. to a[:]
+
+# using list as a stack, this is efficient
+
+list.append(42)
+list.pop()                              # 42
+
+
+# using list as a queue is not efficient  
+                                        
+from collections import deque           # collections.deque, append and pop is fast from both ends
+queue = deque(['a', 'b', 'c'])
+queue.append('d')
+queue.popleft()                         # a
+
+
+# list comprehensions
+
+squares = []
+for x in range(10):
+    squares.append(x**2)                # regular way to create list
+
+squares = list(map(lambda x: x**2, range(10)))  # list comprehension
+
+squares = [x**2 for x in range(10)]     # list comprehension, equivalent
+
+                                        # creating list based on another list (range(10) here)
+                                        # syntax: [expr for 0 or more for or if clauses]
+
+[(x, y) for x in [1,2,3] for in [3,1,4] if x != y]
+                                        # [(1,3), (1,4), (2,3), (2,1), (2,4), (3,1), (3,4)]
+
+combos = []
+for x in [1,2,3]:                       # equivalent
+    for y in [3,1,4]:
+        if x != y:
+            combos.append((x, y))
+
+vec = [-4, -2, 0, 2, 4]
+[x*2 for x in vec]                      # double
+[x for x in vec if x >=0]               # filter
+[abs(x) for x in vec]
+strs = [' asdf ',
+
 '----------------------------------------------------------------------------------------------------'
