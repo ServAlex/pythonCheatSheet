@@ -81,9 +81,9 @@ print('asd2', end=',')			# asd1,asd2,
 
 '----------------------------------------------------------------------------------------------------'
 
-# in conditions
-# non zero integer is true, zero is false
-# non empty sequence (string, list, etc.) is true, empty is false
+			# in conditions
+			# non zero integer is true, zero is false
+			# non empty sequence (string, list, etc.) is true, empty is false
 
 '----------------------------------------------------------------------------------------------------'
 
@@ -166,12 +166,12 @@ def increment(a, b = 1):
 print(increment(10))
 print(increment(10, 2))
 
-                                        # variable value may be used for default value
-                                        # value that is actual at the time of 
-                                        # function difinition will be used
+			# variable value may be used for default value
+			# value that is actual at the time of 
+			# function difinition will be used
 
-                                        # if def value is mutable, 
-                                        # mutations will be preserved from call to call
+			# if def value is mutable, 
+			# mutations will be preserved from call to call
 def a(a, L=[]):
     L.append(a)
     return L
@@ -279,7 +279,7 @@ increments.__annotations__		#{'renurn': <class 'int'>, 'a': <class 'int'>,
 
 '----------------------------------------------------------------------------------------------------'
 
-# lists
+# 5.1 lists
 
 x=42
 L=[] 
@@ -298,13 +298,13 @@ list.sort(key=None, reverse=False)      # sorts the list
 list.reverse()                          # reverses the items order
 list.copy()                             # return a shallow copy. Equiv. to a[:]
 
-# using list as a stack, this is efficient
+# 5.1.1 using list as a stack, this is efficient
 
 list.append(42)
 list.pop()                              # 42
 
 
-# using list as a queue is not efficient  
+# 5.1.2 using list as a queue is not efficient, use deque instead
                                         
 from collections import deque           # collections.deque, append and pop is fast from both ends
 queue = deque(['a', 'b', 'c'])
@@ -312,7 +312,7 @@ queue.append('d')
 queue.popleft()                         # a
 
 
-# list comprehensions
+# 5.1.3 list comprehensions
 
 squares = []
 for x in range(10):
@@ -351,7 +351,7 @@ from math import pi
 [str(round(pi, i)) for i in range(1, 6)] 
 
 
-# nested list comprehension
+# 5.1.4 nested list comprehension
 
 matrix = [
     [1, 2, 3, 4],
@@ -378,7 +378,44 @@ list(zip(*matrix))                      # there is a built in function zip for t
 
 # 5.2   del statement
 
+					# used to remove elements from list by their index
+a = [-1, 1, 66.24, 333, 333, 1234.5]
+del a[0]				# [1, 66.24, 333, 333, 1234.5]
+del a[2:4]				# remove slice [1, 66.24, 1234.5]
+del a[:]				# remove all
 
+del a					# can also remove entire variable
+
+# 5.3 tuples 
+		# lists and strings are sequence data types, tuples are too
+
+t = 1234, 4321, 'hello'			# tuple packing
+t[0]					# 1234
+t					# (1234, 4321, 'hello')
+u = t, (1, 2, 3, 4)			# nested tuples
+u					# ((1234, 4321, 'hello'), (1, 2, 3, 4))
+
+		# tuples are immutable
+		# but may contain mutable objects
+
+		# access to elements: unpacking (*) or indexing
+
+emptyTuple = ()
+singleton = 'single item',		# not comma after single element
+len(empty)				# 0
+singleton				# ('single item',)
+
+x, y, z = t				# sequence unpacking, item numbers should match
+					# multiple assignments is just packing and unpacking
+
+# 5.4 sets
 
 
 '----------------------------------------------------------------------------------------------------'
+
+
+
+####    6   next topic
+
+'----------------------------------------------------------------------------------------------------'
+
