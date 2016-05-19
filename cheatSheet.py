@@ -227,7 +227,7 @@ args = {'a':1, 'b':2, 'c':3}
 addingManyValues(**args)		# ** unpacks dictionary into keyworded args 
 
 
-# lambda expressions
+# lambda expression
 
 addLambda = lambda a, b: a+b		# created function adding together it's two args
 addLambda(1, 2)				# 3
@@ -247,7 +247,7 @@ paris.sort(key=lambda pair: pair[1])
 pairs					# [(3, a), (1, b), (2, f)]
 
 
-# doc strings
+# doc string
 
 					# first line is short summary 
 					# without mentioning function name or type
@@ -262,7 +262,7 @@ def docFunc():
 					# if there's more than one line, second one should be blank
 					
 
-# function annotations
+# function annotation
 
 def increments(a: int, b:int = 1) -> int:
     return a + b
@@ -279,7 +279,7 @@ increments.__annotations__		#{'renurn': <class 'int'>, 'a': <class 'int'>,
 
 '----------------------------------------------------------------------------------------------------'
 
-# 5.1 lists
+# 5.1 list
 
 x=42
 L=[] 
@@ -312,7 +312,7 @@ queue.append('d')
 queue.popleft()                         # a
 
 
-# 5.1.3 list comprehensions
+# 5.1.3 list comprehension
 
 squares = []
 for x in range(10):
@@ -376,7 +376,7 @@ list(zip(*matrix))                      # there is a built in function zip for t
                                         # * unpacks argument lists
 
 
-# 5.2   del statement
+# 5.2 del statement
 
 					# used to remove elements from list by their index
 a = [-1, 1, 66.24, 333, 333, 1234.5]
@@ -386,8 +386,8 @@ del a[:]				# remove all
 
 del a					# can also remove entire variable
 
-# 5.3 tuples 
-		# lists and strings are sequence data types, tuples are too
+# 5.3 tuple 
+			# lists and strings are sequence data types, tuples are too
 
 t = 1234, 4321, 'hello'			# tuple packing
 t[0]					# 1234
@@ -395,10 +395,10 @@ t					# (1234, 4321, 'hello')
 u = t, (1, 2, 3, 4)			# nested tuples
 u					# ((1234, 4321, 'hello'), (1, 2, 3, 4))
 
-		# tuples are immutable
-		# but may contain mutable objects
+			# tuples are immutable
+			# but may contain mutable objects
 
-		# access to elements: unpacking (*) or indexing
+			# access to elements: unpacking (*) or indexing
 
 emptyTuple = ()
 singleton = 'single item',		# not comma after single element
@@ -408,8 +408,28 @@ singleton				# ('single item',)
 x, y, z = t				# sequence unpacking, item numbers should match
 					# multiple assignments is just packing and unpacking
 
-# 5.4 sets
+# 5.4 set
+			# unordered collection with no duplicates
 
+basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
+print(basket)				# {'orange', 'banana', 'pear', 'apple'}
+'orange' in basket			# true, fast membership testing
+'crabgrass' in basket			# false
+
+# set operations
+a = set('abracadabra')
+b = set('alacazam')
+a					# {'a', 'r', 'b', 'c', 'd'}
+a - b					# {'r', 'b', 'd'}
+a | b					# {'a', 'c', 'r', 'b', 'c', 'd', 'm', 'z', 'l'}
+a & b					# {'a', 'c'}
+a ^ b					# {'r', 'b', 'd', 'm', 'z', 'l'}
+
+# set comprehensions similar to list comprehensions
+a = {x for x in 'abracadabra' if x not in 'abc'}
+a					# {'r', 'd'}
+
+# 5.5 dictionary
 
 '----------------------------------------------------------------------------------------------------'
 
