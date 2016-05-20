@@ -279,6 +279,7 @@ increments.__annotations__		#{'renurn': <class 'int'>, 'a': <class 'int'>,
 
 '----------------------------------------------------------------------------------------------------'
 
+
 # 5.1 list
 
 x=42
@@ -297,6 +298,7 @@ list.count(x)                           # returns number of items
 list.sort(key=None, reverse=False)      # sorts the list
 list.reverse()                          # reverses the items order
 list.copy()                             # return a shallow copy. Equiv. to a[:]
+
 
 # 5.1.1 using list as a stack, this is efficient
 
@@ -386,6 +388,7 @@ del a[:]				# remove all
 
 del a					# can also remove entire variable
 
+
 # 5.3 tuple 
 			# lists and strings are sequence data types, tuples are too
 
@@ -408,6 +411,7 @@ singleton				# ('single item',)
 x, y, z = t				# sequence unpacking, item numbers should match
 					# multiple assignments is just packing and unpacking
 
+
 # 5.4 set
 			# unordered collection with no duplicates
 
@@ -429,11 +433,103 @@ a ^ b					# {'r', 'b', 'd', 'm', 'z', 'l'}
 a = {x for x in 'abracadabra' if x not in 'abc'}
 a					# {'r', 'd'}
 
+
 # 5.5 dictionary
+			# kyes should be immutable: string, number, 
+			# 	tuple with strings, numbers and valid tuples
+
+dict = {}				# empty dictionary
+
+tel = {'jack': 4098, 'sape': 4139}
+tel['guido'] = 4127
+tel					# {'sape': 4139, 'guido': 4127, 'jack': 4098}
+tel['jack']				# 4098
+del tel['sape']
+list(tel.keys())			# ['jack', 'guido']
+sorted(tel.keys())			# ['guido', 'jack']
+'guido' in tel				# True
+'jack' not in tel 			# False
+
+# constructor
+dict([('sape', 4139), ('guido', 4127), ('jack', 4098)]) # {'sape': 4139, 'jack': 4098, 'guido': 4127}
+dict(sape=4139, guido=4127, jack=4098)	# {'sape': 4139, 'jack': 4098, 'guido': 4127} - string keys
+
+# dict comprehension
+{x: x**2 for x in (2, 4, 6)}		# {2: 4, 4: 16, 6: 36}
+
+
+# 5.6 looping
+
+# dictionary looping
+knights = {'gallahad': 'the pure', 'robin': 'the brave'}
+for k, v in knights.items():
+	print(k, v)			# gallahad the pure
+					# robin the brave
+
+# sequence index/value looping with enumerate()
+for i, v in enumerate(['tic', 'tac', 'toe']):
+	print(i, v)			# 0 tic 	1 tac 		2 toe
+
+# looping through 2+ sequences at the same time with zip
+letters = ['a', 'b', 'c']
+numbers = [1, 2, 3]
+for l, n in zip(questions, answers):
+	print('{0} {1}'.format(l, n), end=', ')	# a 1    b 2    c 3
+
+# reverse looping
+for i in reversed(range(1, 10, 2)):
+	pring(i)			# 9 7 5 3 1
+
+for i in sorted(set([3, 4, 1, 6, 2, 1])):
+	print(i)			# 1  2  3  4  6
+
+# it is often simpler to create new list instead of modifing looped one
+import math
+raw_data = [56.2, float('NaN'), 51.7, 55.3, float('NaN')]
+filtered_data = []
+for v in raw_data:
+	if not math.isnan(v):
+		filtered_data.append(v)
+filtered_data				# [56.2, 51.7, 55.3]
+
+# 5.7 conditions
+			# condition can contain any operators
+
+in, not in		# check if value occur in sequence
+is, is not		# compare if 2 obj are really the same obj, matters for mutable
+
+			# comparisons have lower priority than numerical operators
+
+			# comparisons can be chained
+a < b == c		# tests if a is less than b and b equals c
+
+and, or, not		# lower priority than comparison, betwen them or < and < not
+			# and, or are short cirquit operators: 
+			# evaluation stops as the outcome is defined
+
+string1, string2, string3 = '', 'Trondheim', 'Hammer Dance'
+non_null = string1 or string2 or string3
+non_null		# 'Trondheim'
+
+			# assignment can not occur inside expressions
+
+# 5.8 comparing sequences and other types
+
+			# sequence objects of the same type can be compared
+			# lexicographical ordering
+			# strings comparison uses Unicode code point number
+
+(1, 2, 3)              < (1, 2, 4)
+[1, 2, 3]              < [1, 2, 4]
+'ABC' < 'C' < 'Pascal' < 'Python'
+(1, 2, 3, 4)           < (1, 2, 4)
+(1, 2)                 < (1, 2, -1)
+(1, 2, 3)             == (1.0, 2.0, 3.0)
+(1, 2, ('aa', 'ab'))   < (1, 2, ('abc', 'a'), 4)
 
 '----------------------------------------------------------------------------------------------------'
 
-
+# 6
 
 ####    6   next topic
 
