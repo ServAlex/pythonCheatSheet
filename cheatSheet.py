@@ -509,7 +509,7 @@ and, or, not		# lower priority than comparison, betwen them or < and < not
 
 string1, string2, string3 = '', 'Trondheim', 'Hammer Dance'
 non_null = string1 or string2 or string3
-non_null		# 'Trondheim'
+non_null		                # 'Trondheim'
 
 			# assignment can not occur inside expressions
 
@@ -531,7 +531,104 @@ non_null		# 'Trondheim'
 
 # 6
 
-####    6   next topic
+####    6   modules
 
 '----------------------------------------------------------------------------------------------------'
+
+                        # module is a file with python definitions and statements
+                        # has name ending with .py
+                        # it's name is accessible inside with a global variable __name__
+
+                        # create file test.py with
+def a():
+    print('a')
+
+def b():
+    return 'b'
+
+def p(str):
+    print(str)
+                        # now in the interpreter or other script/module you can add import it
+import test
+
+test.a()                                # a
+test.b()                                # 'b'
+
+test.__name__                           # test
+
+a = test.a                              # assigning local name to imported function
+a()                                     # a
+
+
+#   6.1     more on modules
+
+                        # module may contain executable statements inteded to initialize it
+                        # they are executed only when module name is encountered first time in import
+                        
+from test import a, b                   # will import a and b directly, test is not defined/imported
+a()                                     # a
+
+from test import *                      # import all names except starting with _
+                                        # usually not used as it may hide already defined names
+
+import importlib
+importlib.reload(modulename)            # to reload module that was updated during interpreter session
+
+
+#   6.1.1 executing modules as scripts
+
+python test.py <arguments>              # module is executed, __name__ is test to __main__
+
+                        # add this to the end
+
+if __name__ == "__main__":              # if module is executed, calls p() with first argument
+    import sys
+    p(sys.argv[1]))
+                        # now this module may be both imported or executed by itself
+python test.py hello
+                        # if this module is imported this code will not run
+
+                        # this is often used for user interfase or testing (executing runs tests)
+
+
+#   6.1.2   module search path
+
+import test
+                        # interpreter first searches built in modules
+                        # if not found it searches in derectories listed in sys.path
+                        # : directory containing script or current directory if file is not specified
+                        # : PYTHONPATH
+                        # : installation-dependent default
+
+                        # program may modifi sys.path after initialization
+                        # current directory is placed in front of search path
+
+#   6.1.3   compiled python files
+
+                        # Python caches compiled version of each module in the __pycache__ directory
+                        # under name module.version.pyc, version is usually a python version
+                        # in CPython release 3.3 compiled version of test.py will be
+                        # __pycache__/test.cpython-3.3.pyc
+
+                        # python checks date of the module against .pyc file and recompiles if needed
+                        # compiled modules are platform independent
+
+                        # compiled and optimized -O, -OO scripts doesn't run fuster, only load faster
+
+                        # module compileall can compile all modules in the directory
+
+
+#   6.2     standard modules
+
+'----------------------------------------------------------------------------------------------------'
+'----------------------------------------------------------------------------------------------------'
+
+
+#### other useful things
+
+import random
+random.random()     # gives random value from [0, 1)
+
+
+
 
