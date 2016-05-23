@@ -529,7 +529,6 @@ non_null		                # 'Trondheim'
 
 '----------------------------------------------------------------------------------------------------'
 
-# 6
 
 ####    6   modules
 
@@ -603,6 +602,7 @@ import test
                         # program may modifi sys.path after initialization
                         # current directory is placed in front of search path
 
+
 #   6.1.3   compiled python files
 
                         # Python caches compiled version of each module in the __pycache__ directory
@@ -619,6 +619,41 @@ import test
 
 
 #   6.2     standard modules
+
+			# some standard modules are built into interpreter
+			# this set it configurable and depends on the platform
+
+import sys				# sys is built 
+
+sys.ps1					# '>>> ' defines primary prompt, can be changed
+sys.ps2					# '... ' defines secondary prompt, can be changed
+					
+sys.path.append('/ufs/guido/lib/python') # way to change path in 
+
+
+# 6.3 	dir()
+
+			# lists variables, modules, functions, etc.
+import test, sys
+dir(test)				# ['__name__', 'a', 'b', 'p']
+dir(sys)				# all the sys definitions
+
+dir()					# lists all currently defined names
+
+import builtins
+dir(builtins)
+
+
+# 6.4	packages
+
+			# package is a collection of modules
+			# way of structuring module namespace by using dotted names
+
+A.B					# designates submodule B in package A
+
+
+
+
 
 '----------------------------------------------------------------------------------------------------'
 '----------------------------------------------------------------------------------------------------'
