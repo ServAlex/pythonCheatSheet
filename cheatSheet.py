@@ -651,6 +651,99 @@ dir(builtins)
 
 A.B					# designates submodule B in package A
 
+# example of audio files processing package
+
+sound/                          	# Top-level package
+      __init__.py               	# Initialize the sound package
+      formats/                  	# Subpackage for file format conversions
+              __init__.py
+              wavread.py
+              wavwrite.py
+              aiffread.py
+              aiffwrite.py
+              auread.py
+              auwrite.py
+              ...
+      effects/                  	# Subpackage for sound effects
+              __init__.py
+              echo.py
+              surround.py
+              reverse.py
+              ...
+      filters/                  	# Subpackage for filters
+              __init__.py
+              equalizer.py
+              vocoder.py
+              karaoke.py
+              ...
+
+			# __init__.py is used to make Python treat directories as containing packages
+			# it may be empty file or it may run some initialization code
+			
+import sound.effects.echo		# imports individual submodule from package
+sound.effects.echo.echofilter(input, output, delay=0.7, atten=4)
+					# running function from this package
+
+from sound.effects import echo		# another way to import submodule
+echo.echofilter(input, output, delay=0.7, atten=4)
+
+from sound.effects.echo import echofilter # importing only one function from submodule
+echofilter(input, output, delay=0.7, atten=4)
+
+from package import item		# item may be a submodule(subpackage) of package
+					# or it may be a name defined in the package (class, function)
+					# import first tests if it's defined in the package
+					# next it tries to load it as a module
+					# ImportError exception is raized if it failed
+
+import item.subitem.subsubitem		# in this case item and subitem must be packages
+					# subsubitem may be a module or package, but not class or var
+
+# 6.4.1	importing * from a package
+
+__all__ = ["echo", "surround", "reverse"] # if __init__.py defines list named __all__
+from package import *			# will import 3 named submodules of sound package
+
+			# if __all__ is not defined from import will ensure that package is imported
+			# funning __init__.py and then import all names defined in package:
+			# names defined by __init__.py
+
+import sound.effects.echo
+import sound.effects.surround
+from sound.effects import *
+
+from package import submodule		# is recomended way to import unless
+					# importing module needs to use submodule with same name
+					# from different package
+
+
+# 6.4.2 intra-package references
+			# it's possible to use absolute import paths withing one package for siblings
+
+from sound.effects import echo		# absolute path: can be used in sound.filters.vocoder
+
+from . import echo			# relative path: from surround module
+from .. import formats
+from ..filters import equalizer
+
+			# relative imports are based on the name of the current module
+			# modules used in main module should be imported using absolute path
+
+# 6.4.3 packages in multiple directories
+
+			# special variable __path__ may hold the directory path holding
+			# package's __init__.py before code in that file is executed
+			# modification of this variable will affect future searches for modules
+
+'----------------------------------------------------------------------------------------------------'
+
+
+### 	7 input/output
+
+'----------------------------------------------------------------------------------------------------'
+
+
+
 
 
 
