@@ -752,11 +752,22 @@ from ..filters import equalizer
 '----------------------------------------------------------------------------------------------------'
 
 
+
 #### other useful things
 
 import random
 random.random()     # gives random value from [0, 1)
 
+
+# filesystem interaction
+
+import os
+os.getcwd()		# get current directory path
+
+os.chdir('path')	# chenge current directory
+
+import glob
+glob.glob('*.cpp')	# get list of all files in current directory conforming to *.cpp pattern
 
 
 
