@@ -763,8 +763,10 @@ random.random()     # gives random value from [0, 1)
 
 import os
 os.getcwd()		# get current directory path
+os.path.dirname(os.path.abspath('.'))	# same, abspath is for dealing with weird windows cases
 
 os.chdir('path')	# chenge current directory
+
 
 import glob
 glob.glob('*.cpp')	# get list of all files in current directory conforming to *.cpp pattern
