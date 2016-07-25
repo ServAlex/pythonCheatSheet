@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 
 '----------------------------------------------------------------------------------------------------'
 
@@ -19,6 +20,8 @@ word[-1]				# n - 1st from the end
 word[0:2]				# slice, first included, second excluded
 word[:2] + word[2:]			# from beginning to 2nd and from 2nd to the end
 word[:]					# the whole word
+
+#TODO: expand string functions https://docs.python.org/3/library/stdtypes.html#textseq 
 
 # strings are immutable, you have to compile new one
 
@@ -772,4 +775,11 @@ import glob
 glob.glob('*.cpp')	# get list of all files in current directory conforming to *.cpp pattern
 
 
+# file io
+
+import fileinput
+
+with fileinput.FileInput(fileToSearch, inplace=True, backup='.bak') as file:
+    for line in file:
+        print(line.replace(textToSearch, textToReplace), end='')
 
